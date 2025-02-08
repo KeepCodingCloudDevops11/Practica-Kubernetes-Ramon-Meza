@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wordpress-pvc
+  namespace: mi-practica-keepcoding
+spec:
+  accessModes:
+    - {{ .Values.miAppPractica.persistence.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.miAppPractica.persistence.size }}
+  storageClassName: {{ .Values.miAppPractica.persistence.storageClass }}

@@ -1,0 +1,135 @@
+miAppPractica:
+  image:
+    repository: "wordpress"  # Aquí puedes poner la imagen que desees
+    tag: "latest"
+    pullPolicy: IfNotPresent
+  service:
+    port: 80
+    type: ClusterIP
+  resources:
+    requests:
+      cpu: "250m"  # Solicitud de CPU
+      memory: "512Mi"
+    limits:
+      cpu: "500m"  # Límite de CPU
+      memory: "1Gi"
+
+  persistence:
+    enabled: true
+    storageClass: "standard"  # Si tienes una clase de almacenamiento específica
+    accessMode: ReadWriteOnce  # Modo de acceso al volumen
+    size: 8Gi  # Tamaño del volumen
+
+mysql:
+  replicaCount: 1
+  image:
+    repository: mysql        # Usa la imagen pública de mysql
+    tag: "5.7"                # Versión 5.7 de MySQL
+  rootPassword: "miContraseñaSegura123"  # Contraseña del root de MySQL
+  user: "miusuario"  # Nombre de usuario para la base de datos
+  password: "miContraseñaDeUsuario123"  # Contraseña para el usuario
+  database: "midatabase"  # Nombre de la base de datos a crear
+  persistence:
+    enabled: true
+    storageClass: "standard"  # Si tienes una clase de almacenamiento específica
+    accessMode: ReadWriteOnce  # Modo de acceso al volumen
+    size: 8Gi  # Tamaño del volumen
+
+# Configuración de Ingress (para acceder desde fuera del clúster)
+ingress:
+  enabled: true
+  hosts:
+    - host: "wordpress.local"
+      paths:
+        - path: /
+          pathType: Prefix
+
+
+# Configuración de la cuenta de servicio
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""  # Si deseas un nombre específico para la cuenta, inclúyelo aquí
+
+# Anotaciones y etiquetas de los Pods
+podAnnotations: {}
+podLabels: {}
+
+# Contexto de seguridad para los Pods (opcional)
+podSecurityContext: {}
+
+# Contexto de seguridad para los contenedores (opcional)
+securityContext: {}
+
+# Configuración de las probes de liveness y readiness
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+# Configuración para el autoscaling (si se necesita)
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+
+# Volúmenes adicionales para el despliegue (si es necesario)
+volumes: []
+# Volúmenes montados adicionales para el despliegue (si es necesario)
+volumeMounts: []
+
+# Selector de nodos para programar los Pods en nodos específicos
+nodeSelector: {}
+
+# Tolerancias para los Pods
+tolerations: []
+
+# Añadir fullnameOverride aquí
+fullnameOverride: ""  # Asegúrate de agregar esta línea
+
+# Prometheus y Grafana configuration
+prometheus:
+  enabled: true
+  alertmanager:
+    enabled: true
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector:
+      matchLabels:
+        app: "wordpress"  # Asegúrate de que esto coincida con tu etiqueta de servicio de la aplicación
+
+grafana:
+  enabled: true
+  adminPassword: "admin"  # Cambia la contraseña por algo más seguro
+  service:
+    type: ClusterIP  # Permite acceder a Grafana desde fuera del clúster
+  datasources:
+    prometheus:
+      url: http://prometheus-operated:9090  # URL de Prometheus para la conexión con Grafana
+
+# Volúmenes para Prometheus
+prometheus:
+  persistentVolume:
+    enabled: true
+    size: 8Gi
+    storageClass: standard
+
+# Volúmenes para Grafana (si es necesario)
+grafanaPersistence:
+  enabled: true
+  storageClass: "standard"
+  accessMode: ReadWriteOnce
+  size: 5Gi
+
+# Configuración de HPA (Horizontal Pod Autoscaler) para Grafana si es necesario
+hpaGrafana:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80

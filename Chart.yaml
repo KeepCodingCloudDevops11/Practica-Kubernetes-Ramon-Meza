@@ -1,0 +1,16 @@
+apiVersion: v2
+name: practica-ramon-keepcoding
+description: A Helm chart for deploying WordPress with MySQL and high availability
+version: 0.1.0
+appVersion: "5.7"   # Versión de MySQL (o WordPress si lo prefieres aquí)
+keywords:
+  - wordpress
+  - mysql
+  - helm
+  - kubernetes
+maintainers:
+  - name: Ramon
+    email: ramon@example.com  # Cambia esto por el correo del mantenedor
+home: "http://example.com"  # Puedes agregar el sitio web de tu aplicación o repositorio
+sources:
+  - "https://github.com/your-repo/practica-ramon-keepcoding"  # Si tienes un repositorio en GitHub o alguna fuente relevante

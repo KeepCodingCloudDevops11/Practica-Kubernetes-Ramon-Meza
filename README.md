@@ -142,6 +142,12 @@ Una vez que hayas desplegado WordPress y MySQL, verifica que todo esté funciona
 ---
 ![Verificaciones](Imagenes/Verificaciones.png)
 
+## Notas Finales
+- **Persistencia de Datos**: La configuración de persistencia de datos para WordPress y MySQL está habilitada, lo que asegura que los datos no se perderán al reiniciar los pods.
+- **Escalabilidad**: Los despliegues de WordPress y MySQL son escalables, lo que significa que puedes ajustar la cantidad de réplicas de los pods según sea necesario.
+- **Seguridad**: Asegúrate de modificar las contraseñas predeterminadas antes de utilizar la aplicación en producción.
+- **Pod Stress**: El pod stress, está en estado "Completed" en un pod de Kubernetes indica que el contenedor dentro del pod ha terminado su ejecución correctamente. Esto normalmente significa que el pod se ejecutó, completó su tarea o proceso, y luego terminó su ciclo de vida.
+  
 ## Acceso a WordPress desde el Navegador
 Existen dos formas de acceder a la interfaz de WordPress desplegada en Kubernetes.
 
@@ -164,6 +170,7 @@ kubectl port-forward svc/wordpress 8080:80 --namespace mi-practica-keepcoding
 Después de ejecutar este comando, abre tu navegador y accede a `http://localhost:8080` para acceder a la interfaz de usuario de WordPress y realizar la configuración inicial.
 
 ---
+![app](Imagenes/app.png)
 
 ## Notas Finales
 - **Persistencia de Datos**: La configuración de persistencia de datos para WordPress y MySQL está habilitada, lo que asegura que los datos no se perderán al reiniciar los pods.

@@ -140,7 +140,8 @@ Una vez que hayas desplegado WordPress y MySQL, verifica que todo esté funciona
     ```
 
 ---
-![verificaciones](verificaciones.png)
+![Verificaciones](Imagenes/Verificaciones.png)
+
 ## Acceso a WordPress desde el Navegador
 Existen dos formas de acceder a la interfaz de WordPress desplegada en Kubernetes.
 

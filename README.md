@@ -3,9 +3,9 @@
 Despliegue de una Aplicación en Kubernetes con Base de Datos utilizando Helm.
 Esta práctica ofrece un enfoque integral para desplegar una aplicación escalable, segura y fácil de gestionar en un entorno Kubernetes, con una base de datos persistente y monitoreo en tiempo real para asegurar su rendimiento óptimo.
 
-¡Aquí tienes el contenido listo para ser guardado como código en GitHub! Puedes usarlo para documentar el proceso de despliegue de WordPress y MySQL en Kubernetes usando Helm.
 
-```markdown
+
+
 # Despliegue de WordPress y MySQL en Kubernetes usando Helm
 
 ## Índice
@@ -17,7 +17,7 @@ Esta práctica ofrece un enfoque integral para desplegar una aplicación escalab
 6. [Verificación del Despliegue](#verificación-del-despliegue)
 7. [Acceso a WordPress desde el Navegador](#acceso-a-wordpress-desde-el-navegador)
 
----
+
 
 ## Requisitos Previos
 Antes de comenzar, asegúrate de tener los siguientes requisitos previos instalados en tu sistema:
@@ -32,7 +32,6 @@ Si no tienes estas herramientas, puedes seguir las instrucciones de instalación
 - [Instalar Helm](https://helm.sh/docs/intro/install/)
 - [Instalar kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
----
 
 ## Instalación de Helm en Minikube
 A continuación, te proporcionamos los pasos para instalar Helm en tu clúster de Minikube:
@@ -47,13 +46,13 @@ A continuación, te proporcionamos los pasos para instalar Helm en tu clúster d
     tar -zxvf helm.tar.gz
     sudo mv linux-amd64/helm /usr/local/bin/helm
     ```
+    
 3. **Inicializa Helm en Minikube**: Ejecuta el siguiente comando para asegurarte de que Helm esté conectado a tu clúster de Minikube:
     ```bash
     helm repo add bitnami https://charts.bitnami.com/bitnami
     helm repo update
     ```
 
----
 
 ## Crear Namespace en Minikube
 Para organizar los recursos en tu clúster de Kubernetes, vamos a crear un namespace llamado `mi-practica-keepcoding`:
@@ -65,12 +64,11 @@ Para organizar los recursos en tu clúster de Kubernetes, vamos a crear un names
 
 Este namespace se usará para desplegar tanto WordPress como MySQL.
 
----
 
 ## Estructura de Directorios
 La siguiente es la estructura de directorios para tu proyecto `practica-ramon-keepcoding`. Esta estructura contiene los archivos y configuraciones necesarias para el despliegue de WordPress y MySQL utilizando Helm.
 
-```plaintext
+```bash
 practica-ramon-keepcoding/
 ├── charts/
 ├── test/
@@ -94,9 +92,8 @@ practica-ramon-keepcoding/
 ├── values.yaml
 ├── Chart.yaml
 └── .helmignore
-```
 
----
+ ```
 
 ## Despliegue de WordPress y MySQL
 Con los directorios y archivos ya preparados, ahora puedes desplegar WordPress y MySQL usando Helm.
@@ -171,6 +168,6 @@ Después de ejecutar este comando, abre tu navegador y accede a `http://localhos
 - **Persistencia de Datos**: La configuración de persistencia de datos para WordPress y MySQL está habilitada, lo que asegura que los datos no se perderán al reiniciar los pods.
 - **Escalabilidad**: Los despliegues de WordPress y MySQL son escalables, lo que significa que puedes ajustar la cantidad de réplicas de los pods según sea necesario.
 - **Seguridad**: Asegúrate de modificar las contraseñas predeterminadas antes de utilizar la aplicación en producción.
-```
 
-Este archivo se puede guardar como `README.md` o similar en tu repositorio de GitHub. Si necesitas agregar algún archivo adicional o script, puedes complementarlo en las carpetas adecuadas dentro de tu estructura de directorios.
+
+

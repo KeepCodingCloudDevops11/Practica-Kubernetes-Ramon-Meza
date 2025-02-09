@@ -1,4 +1,4 @@
-# Práctica-kubernetes-Ramon-meza
+## Práctica-kubernetes-Ramon-meza
 
 Despliegue de una Aplicación en Kubernetes con Base de Datos utilizando Helm.
 Esta práctica ofrece un enfoque integral para desplegar una aplicación escalable, segura y fácil de gestionar en un entorno Kubernetes, con una base de datos persistente y monitoreo en tiempo real para asegurar su rendimiento óptimo.
@@ -6,9 +6,9 @@ Esta práctica ofrece un enfoque integral para desplegar una aplicación escalab
 
 
 
-# Despliegue de WordPress y MySQL en Kubernetes usando Helm
+### Despliegue de WordPress y MySQL en Kubernetes usando Helm
 
-## Índice
+#### Índice
 1. [Requisitos Previos](#requisitos-previos)
 2. [Instalación de Helm en Minikube](#instalación-de-helm-en-minikube)
 3. [Crear Namespace en Minikube](#crear-namespace-en-minikube)
@@ -20,7 +20,7 @@ Esta práctica ofrece un enfoque integral para desplegar una aplicación escalab
    
 
 
-## Requisitos Previos
+### Requisitos previos
 Antes de comenzar, asegúrate de tener los siguientes requisitos previos instalados en tu sistema:
 
 1. **Minikube**: Para crear y gestionar el clúster de Kubernetes localmente.
@@ -34,7 +34,7 @@ Si no tienes estas herramientas, puedes seguir las instrucciones de instalación
 - [Instalar kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 
-## Instalación de Helm en Minikube
+### Instalación de Helm en Minikube
 A continuación, te proporcionamos los pasos para instalar Helm en tu clúster de Minikube:
 
 1. **Inicia Minikube**: Si aún no has iniciado Minikube, puedes hacerlo con el siguiente comando:
@@ -48,14 +48,14 @@ A continuación, te proporcionamos los pasos para instalar Helm en tu clúster d
     sudo mv linux-amd64/helm /usr/local/bin/helm
     ```
     
-3. **Inicializa Helm en Minikube**: Ejecuta el siguiente comando para asegurarte de que Helm esté conectado a tu clúster de Minikube:
+3. **Inicializa Helm en minikube**: Ejecuta el siguiente comando para asegurarte de que Helm esté conectado a tu clúster de Minikube:
     ```bash
     helm repo add bitnami https://charts.bitnami.com/bitnami
     helm repo update
     ```
 
 
-## Crear Namespace en Minikube
+### Crear namespace en minikube
 Para organizar los recursos en tu clúster de Kubernetes, vamos a crear un namespace llamado `mi-practica-keepcoding`:
 
 1. **Crea el namespace** con el siguiente comando:
@@ -66,7 +66,7 @@ Para organizar los recursos en tu clúster de Kubernetes, vamos a crear un names
 Este namespace se usará para desplegar tanto WordPress como MySQL.
 
 
-## Estructura de Directorios
+### Estructura de directorios
 La siguiente es la estructura de directorios para tu proyecto `practica-ramon-keepcoding`. Esta estructura contiene los archivos y configuraciones necesarias para el despliegue de WordPress y MySQL utilizando Helm.
 
 ```bash
@@ -96,10 +96,10 @@ practica-ramon-keepcoding/
 
  ```
 
-## Despliegue de WordPress y MySQL
+### Despliegue de WordPress y MySQL
 Con los directorios y archivos ya preparados, ahora puedes desplegar WordPress y MySQL usando Helm.
 
-### Instalación Inicial
+### Instalación inicial
 Para instalar WordPress y MySQL en tu clúster de Minikube, ejecuta el siguiente comando:
 
 ```bash
@@ -122,7 +122,7 @@ Si necesitas realizar cambios en la configuración de la instalación, como modi
 
 ---
 
-## Verificación del Despliegue
+### Verificación del despliegue
 Una vez que hayas desplegado WordPress y MySQL, verifica que todo esté funcionando correctamente usando los siguientes comandos:
 
 1. **Verifica los pods**:
@@ -143,13 +143,13 @@ Una vez que hayas desplegado WordPress y MySQL, verifica que todo esté funciona
 ---
 ![Verificaciones](Imagenes/Verificaciones.png)
 
-## Notas Finales
+### Notas finales
 - **Persistencia de Datos**: La configuración de persistencia de datos para WordPress y MySQL está habilitada, lo que asegura que los datos no se perderán al reiniciar los pods.
 - **Escalabilidad**: Los despliegues de WordPress y MySQL son escalables, lo que significa que puedes ajustar la cantidad de réplicas de los pods según sea necesario.
 - **Seguridad**: Asegúrate de modificar las contraseñas predeterminadas antes de utilizar la aplicación en producción.
 - **Pod Stress**: El pod stress, está en estado "Completed" en un pod de Kubernetes indica que el contenedor dentro del pod ha terminado su ejecución correctamente. Esto normalmente significa que el pod se ejecutó, completó su tarea o proceso, y luego terminó su ciclo de vida.
   
-## Acceso a WordPress desde el Navegador
+## Acceso a WordPress desde el navegador
 Existen dos formas de acceder a la interfaz de WordPress desplegada en Kubernetes.
 
 ### 1. Acceder usando `minikube service`
@@ -173,7 +173,7 @@ Después de ejecutar este comando, abre tu navegador y accede a `http://localhos
 ---
 ![app](Imagenes/app.png)
 
-## Notas Finales
+### Notas Finales
 - **Persistencia de Datos**: La configuración de persistencia de datos para WordPress y MySQL está habilitada, lo que asegura que los datos no se perderán al reiniciar los pods.
 - **Escalabilidad**: Los despliegues de WordPress y MySQL son escalables, lo que significa que puedes ajustar la cantidad de réplicas de los pods según sea necesario.
 - **Seguridad**: Asegúrate de modificar las contraseñas predeterminadas antes de utilizar la aplicación en producción.
@@ -181,7 +181,7 @@ Después de ejecutar este comando, abre tu navegador y accede a `http://localhos
 # Integración de Prometheus y Grafana para Recolección de Métricas
 El bjetivo integrar Prometheus para la recolección de métricas y Grafana para la visualización de estas métricas en un clúster de Minikube, donde ya están configurados WordPress y MySQL.
 
-## Instalar Prometheus
+### Instalar Prometheus
 
 Para comenzar, vamos a instalar Prometheus, que se encargará de recolectar las métricas de nuestro clúster de Kubernetes.
 

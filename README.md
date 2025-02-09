@@ -18,7 +18,6 @@ Esta práctica ofrece un enfoque integral para desplegar una aplicación escalab
 7. [Acceso a WordPress desde el Navegador](#acceso-a-wordpress-desde-el-navegador)
 
 
-
 ## Requisitos Previos
 Antes de comenzar, asegúrate de tener los siguientes requisitos previos instalados en tu sistema:
 
@@ -176,6 +175,90 @@ Después de ejecutar este comando, abre tu navegador y accede a `http://localhos
 - **Persistencia de Datos**: La configuración de persistencia de datos para WordPress y MySQL está habilitada, lo que asegura que los datos no se perderán al reiniciar los pods.
 - **Escalabilidad**: Los despliegues de WordPress y MySQL son escalables, lo que significa que puedes ajustar la cantidad de réplicas de los pods según sea necesario.
 - **Seguridad**: Asegúrate de modificar las contraseñas predeterminadas antes de utilizar la aplicación en producción.
+
+## 8. Instalar Prometheus
+
+Para comenzar, vamos a instalar Prometheus, que se encargará de recolectar las métricas de nuestro clúster de Kubernetes.
+
+### Paso 8: Instalar Prometheus
+
+Ejecuta el siguiente comando para instalar Prometheus desde el repositorio de **Prometheus Community**:
+
+```bash
+helm install prometheus prometheus-community/prometheus
+
+Esto instalará Prometheus en tu clúster de Minikube.
+
+Paso 2: Verificar los Pods de Prometheus
+
+Una vez que Prometheus esté instalado, puedes verificar que los pods estén corriendo correctamente con el siguiente comando:
+
+kubectl get pods
+
+Deberías ver los pods de Prometheus en estado Running.
+
+### 9. Acceder a Prometheus
+
+Ahora que tenemos Prometheus instalado, vamos a exponer el servicio para poder acceder a él desde fuera del clúster.
+Paso 1: Exponer el servicio de Prometheus como un NodePort
+
+Para acceder a Prometheus, vamos a exponer el servicio usando un NodePort. Ejecuta el siguiente comando:
+
+kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-np
+
+Este comando crea un servicio accesible desde fuera del clúster para interactuar con Prometheus.
+Paso 2: Acceder a Prometheus
+
+Para acceder a Prometheus, ejecuta el siguiente comando para abrir la URL en tu navegador:
+
+minikube service prometheus-server-np
+
+Este comando abrirá un túnel que te permitirá acceder a Prometheus desde tu navegador local. La interfaz de Prometheus te permitirá visualizar y consultar las métricas recolectadas.
+
+### 10. Instalar Grafana
+
+A continuación, vamos a instalar Grafana, que se encargará de la visualización de las métricas recolectadas por Prometheus.
+Paso 1: Agregar el repositorio de Grafana
+
+Primero, necesitas agregar el repositorio de Grafana a tu instalación de Helm:
+
+helm repo add grafana https://grafana.github.io/helm-chart
+helm repo update
+
+Paso 2: Instalar Grafana
+
+Ahora puedes instalar Grafana en tu clúster ejecutando el siguiente comando:
+
+helm install my-grafana grafana/Grafana
+
+Esto instalará Grafana y creará todos los recursos necesarios.
+
+### 11. Acceder a Grafana
+
+Finalmente, vamos a exponer el servicio de Grafana como un NodePort y obtener la contraseña de administrador para iniciar sesión en la interfaz de Grafana.
+Paso 1: Exponer el servicio de Grafana como un NodePort
+
+Ejecuta el siguiente comando para exponer Grafana como un servicio accesible desde fuera del clúster:
+
+kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-np
+
+Paso 2: Obtener la contraseña de administrador de Grafana
+
+La contraseña de administrador de Grafana está almacenada en un secreto de Kubernetes. Para obtenerla, ejecuta el siguiente comando:
+
+kubectl get secret my-grafana -n default -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+Paso 3: Acceder a Grafana
+
+Una vez que hayas obtenido la contraseña, puedes acceder a Grafana desde tu navegador. Ejecuta el siguiente comando para abrir el servicio de Grafana en tu navegador:
+
+minikube service grafana-np
+
+Este comando abrirá un túnel hacia Grafana en tu navegador local. La interfaz de Grafana debería aparecer, donde puedes iniciar sesión usando las credenciales:
+
+    Usuario: admin
+    Contraseña: La contraseña obtenida con el comando anterior.
+
 
 
 

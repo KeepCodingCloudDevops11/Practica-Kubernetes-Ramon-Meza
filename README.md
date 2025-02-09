@@ -220,7 +220,7 @@ Para acceder a Prometheus, ejecuta el siguiente comando para abrir la URL en tu 
 minikube service prometheus-server-np
 ```
 Este comando abrirá un túnel que te permitirá acceder a Prometheus desde tu navegador local. La interfaz de Prometheus te permitirá visualizar y consultar las métricas recolectadas.
-imagen
+![Prometheus](Imagenes/Prometheus.png)
 
 ### Instalar Grafana
 
@@ -261,13 +261,13 @@ Una vez que hayas obtenido la contraseña, puedes acceder a Grafana desde tu nav
 ```bash
 minikube service grafana-np
  ```
-imagen
+![nodo-grafana](Imagenes/nodo-grafana.png)
 Este comando abrirá un túnel hacia Grafana en tu navegador local. La interfaz de Grafana debería aparecer, donde puedes iniciar sesión usando las credenciales:
 
     Usuario: admin
     Contraseña: La contraseña obtenida con el comando anterior.
 
-imaged de grafa
+![grafana](Imagenes/grafana.png)
 
-Metrica imagen
+![metricas-cpu](Imagenes/metricas-cpu.png)
 

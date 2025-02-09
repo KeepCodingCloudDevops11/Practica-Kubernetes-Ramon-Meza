@@ -265,7 +265,7 @@ minikube service grafana-np
 Este comando abrirá un túnel hacia Grafana en tu navegador local. La interfaz de Grafana debería aparecer, donde puedes iniciar sesión usando las credenciales:
 
     Usuario: admin
-    Contraseña: La contraseña obtenida con el comando anterior.
+    Contraseña: La contraseña obtenida de administrador de Grafana.
 
 ![grafana](Imagenes/grafana.png)
 

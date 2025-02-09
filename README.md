@@ -178,89 +178,96 @@ Después de ejecutar este comando, abre tu navegador y accede a `http://localhos
 - **Escalabilidad**: Los despliegues de WordPress y MySQL son escalables, lo que significa que puedes ajustar la cantidad de réplicas de los pods según sea necesario.
 - **Seguridad**: Asegúrate de modificar las contraseñas predeterminadas antes de utilizar la aplicación en producción.
 
-## 8. Instalar Prometheus
+# Integración de Prometheus y Grafana para Recolección de Métricas
+El bjetivo integrar Prometheus para la recolección de métricas y Grafana para la visualización de estas métricas en un clúster de Minikube, donde ya están configurados WordPress y MySQL.
+
+## Instalar Prometheus
 
 Para comenzar, vamos a instalar Prometheus, que se encargará de recolectar las métricas de nuestro clúster de Kubernetes.
 
-### Paso 8: Instalar Prometheus
+### Instalar Prometheus
 
 Ejecuta el siguiente comando para instalar Prometheus desde el repositorio de **Prometheus Community**:
-
 ```bash
 helm install prometheus prometheus-community/prometheus
-
+ ```
 Esto instalará Prometheus en tu clúster de Minikube.
 
-Paso 2: Verificar los Pods de Prometheus
+# Verificar los Pods de Prometheus
 
 Una vez que Prometheus esté instalado, puedes verificar que los pods estén corriendo correctamente con el siguiente comando:
-
+```bash
 kubectl get pods
-
+ ```
 Deberías ver los pods de Prometheus en estado Running.
 
-### 9. Acceder a Prometheus
+### Acceder a Prometheus
 
 Ahora que tenemos Prometheus instalado, vamos a exponer el servicio para poder acceder a él desde fuera del clúster.
-Paso 1: Exponer el servicio de Prometheus como un NodePort
+
+# Paso 1: Exponer el servicio de Prometheus como un NodePort
 
 Para acceder a Prometheus, vamos a exponer el servicio usando un NodePort. Ejecuta el siguiente comando:
-
+```bash
 kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-np
-
+```
 Este comando crea un servicio accesible desde fuera del clúster para interactuar con Prometheus.
-Paso 2: Acceder a Prometheus
+
+# Paso 2: Acceder a Prometheus
 
 Para acceder a Prometheus, ejecuta el siguiente comando para abrir la URL en tu navegador:
-
+```bash
 minikube service prometheus-server-np
-
+```
 Este comando abrirá un túnel que te permitirá acceder a Prometheus desde tu navegador local. La interfaz de Prometheus te permitirá visualizar y consultar las métricas recolectadas.
+imagen
 
-### 10. Instalar Grafana
+### Instalar Grafana
 
 A continuación, vamos a instalar Grafana, que se encargará de la visualización de las métricas recolectadas por Prometheus.
-Paso 1: Agregar el repositorio de Grafana
+# Paso 1: Agregar el repositorio de Grafana
 
 Primero, necesitas agregar el repositorio de Grafana a tu instalación de Helm:
-
+```bash
 helm repo add grafana https://grafana.github.io/helm-chart
 helm repo update
-
-Paso 2: Instalar Grafana
+ ```
+# Paso 2: Instalar Grafana
 
 Ahora puedes instalar Grafana en tu clúster ejecutando el siguiente comando:
-
+```bash
 helm install my-grafana grafana/Grafana
-
+ ```
 Esto instalará Grafana y creará todos los recursos necesarios.
 
-### 11. Acceder a Grafana
+### Acceder a Grafana
 
 Finalmente, vamos a exponer el servicio de Grafana como un NodePort y obtener la contraseña de administrador para iniciar sesión en la interfaz de Grafana.
-Paso 1: Exponer el servicio de Grafana como un NodePort
+# Paso 1: Exponer el servicio de Grafana como un NodePort
 
 Ejecuta el siguiente comando para exponer Grafana como un servicio accesible desde fuera del clúster:
-
+```bash
 kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-np
-
-Paso 2: Obtener la contraseña de administrador de Grafana
+```
+# Paso 2: Obtener la contraseña de administrador de Grafana
 
 La contraseña de administrador de Grafana está almacenada en un secreto de Kubernetes. Para obtenerla, ejecuta el siguiente comando:
-
+```bash
 kubectl get secret my-grafana -n default -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-
-Paso 3: Acceder a Grafana
+```
+# Paso 3: Acceder a Grafana
 
 Una vez que hayas obtenido la contraseña, puedes acceder a Grafana desde tu navegador. Ejecuta el siguiente comando para abrir el servicio de Grafana en tu navegador:
-
+```bash
 minikube service grafana-np
-
+ ```
+imagen
 Este comando abrirá un túnel hacia Grafana en tu navegador local. La interfaz de Grafana debería aparecer, donde puedes iniciar sesión usando las credenciales:
 
     Usuario: admin
     Contraseña: La contraseña obtenida con el comando anterior.
 
+imaged de grafa
 
-
+Metrica imagen
 

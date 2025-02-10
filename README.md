@@ -193,7 +193,7 @@ helm install prometheus prometheus-community/prometheus
  ```
 Esto instalará Prometheus en tu clúster de Minikube.
 
-# Verificar los Pods de Prometheus
+### Verificar los Pods de Prometheus
 
 Una vez que Prometheus esté instalado, puedes verificar que los pods estén corriendo correctamente con el siguiente comando:
 ```bash
@@ -205,7 +205,7 @@ Deberías ver los pods de Prometheus en estado Running.
 
 Ahora que tenemos Prometheus instalado, vamos a exponer el servicio para poder acceder a él desde fuera del clúster.
 
-# Paso 1: Exponer el servicio de Prometheus como un NodePort
+### Paso 1: Exponer el servicio de Prometheus como un NodePort
 
 Para acceder a Prometheus, vamos a exponer el servicio usando un NodePort. Ejecuta el siguiente comando:
 ```bash
@@ -213,7 +213,7 @@ kubectl expose service prometheus-server --type=NodePort --target-port=9090 --na
 ```
 Este comando crea un servicio accesible desde fuera del clúster para interactuar con Prometheus.
 
-# Paso 2: Acceder a Prometheus
+### Paso 2: Acceder a Prometheus
 
 Para acceder a Prometheus, ejecuta el siguiente comando para abrir la URL en tu navegador:
 ```bash
@@ -232,7 +232,7 @@ Primero, necesitas agregar el repositorio de Grafana a tu instalación de Helm:
 helm repo add grafana https://grafana.github.io/helm-chart
 helm repo update
  ```
-# Paso 2: Instalar Grafana
+### Paso 2: Instalar Grafana
 
 Ahora puedes instalar Grafana en tu clúster ejecutando el siguiente comando:
 ```bash
@@ -243,19 +243,19 @@ Esto instalará Grafana y creará todos los recursos necesarios.
 ### Acceder a Grafana
 
 Finalmente, vamos a exponer el servicio de Grafana como un NodePort y obtener la contraseña de administrador para iniciar sesión en la interfaz de Grafana.
-# Paso 1: Exponer el servicio de Grafana como un NodePort
+### Paso 1: Exponer el servicio de Grafana como un NodePort
 
 Ejecuta el siguiente comando para exponer Grafana como un servicio accesible desde fuera del clúster:
 ```bash
 kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-np
 ```
-# Paso 2: Obtener la contraseña de administrador de Grafana
+### Paso 2: Obtener la contraseña de administrador de Grafana
 
 La contraseña de administrador de Grafana está almacenada en un secreto de Kubernetes. Para obtenerla, ejecuta el siguiente comando:
 ```bash
 kubectl get secret my-grafana -n default -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
-# Paso 3: Acceder a Grafana
+### Paso 3: Acceder a Grafana
 
 Una vez que hayas obtenido la contraseña, puedes acceder a Grafana desde tu navegador. Ejecuta el siguiente comando para abrir el servicio de Grafana en tu navegador:
 ```bash

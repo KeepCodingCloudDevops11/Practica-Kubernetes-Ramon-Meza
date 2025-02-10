@@ -225,7 +225,7 @@ Este comando abrirá un túnel que te permitirá acceder a Prometheus desde tu n
 ### Instalar Grafana
 
 A continuación, vamos a instalar Grafana, que se encargará de la visualización de las métricas recolectadas por Prometheus.
-# Paso 1: Agregar el repositorio de Grafana
+### Paso 1: Agregar el repositorio de Grafana
 
 Primero, necesitas agregar el repositorio de Grafana a tu instalación de Helm:
 ```bash
